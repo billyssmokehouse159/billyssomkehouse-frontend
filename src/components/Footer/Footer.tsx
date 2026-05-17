@@ -3,7 +3,7 @@ import { Logo } from "../Headers/Logo";
 
 export const Footer = () => {
   const device = useDeviceType();
-
+  const isMobile = device === "mobile";
   return (
     <div
       style={{
@@ -43,8 +43,10 @@ export const Footer = () => {
         <div
           style={{
             display: "grid",
+            gridTemplateRows:
+              device === "mobile" ? "2px 1fr 2px 1fr 2px 1fr 2px 1fr" : "1fr",
             gridTemplateColumns:
-              device === "mobile" ? "1fr" : "1fr 2px 1fr 2px 1fr 2px 1fr",
+              device === "mobile" ? "1fr" : "2px 1fr 2px 1fr 2px 1fr 2px 1fr",
             fontSize: "25px",
             fontWeight: 400,
             letterSpacing: "3px",
@@ -57,6 +59,8 @@ export const Footer = () => {
             backgroundColor: "rgb(51 51 51)",
           }}
         >
+          <Divider isMobile={isMobile} />
+
           <div
             style={{
               cursor: "pointer",
@@ -65,7 +69,7 @@ export const Footer = () => {
           >
             Menu
           </div>
-          <Divider />
+          <Divider isMobile={isMobile} />
           <div
             style={{
               cursor: "pointer",
@@ -74,7 +78,7 @@ export const Footer = () => {
           >
             Location
           </div>
-          <Divider />
+          <Divider isMobile={isMobile} />
 
           <div
             style={{
@@ -84,7 +88,7 @@ export const Footer = () => {
           >
             GiftCards
           </div>
-          <Divider />
+          <Divider isMobile={isMobile} />
 
           <div
             style={{
@@ -100,11 +104,14 @@ export const Footer = () => {
   );
 };
 
-export const Divider = ()=>{
-  return <div
-  style={{
-    height: "100%",
-    width: "2px",
-    backgroundColor: "pink"
-  }}></div>
-}
+export const Divider = ({ isMobile }: { isMobile: boolean }) => {
+  return (
+    <div
+      style={{
+        height: "100%",
+        width: isMobile ? "100%" : "2px",
+        backgroundColor: "pink",
+      }}
+    ></div>
+  );
+};
